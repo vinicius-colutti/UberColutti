@@ -1,14 +1,50 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
+  <div #map>
+    <ion-searchbar [(ngModel)]="search" (ionChange)="searchChanged()" placeholder="Para Onde?" type="ios" [hidden]="destination"></ion-searchbar>
+
+    <ion-button class="ion-margin-top" (click)="back()" color="dark" fill="clear" size="small" [hidden]="!destination">
+      <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+    </ion-button>
+
+    <ion-list class="ion-margin-horizontal" [hidden]="!search.length">
+      <ion-item (click)="calcRoute(result)" *ngFor="let result of searchResults">
+        {{result.description}}
+      </ion-item>
+    </ion-list>
+
+    <div class="request-car ion-padding ion-text-center" [hidden]="!destination">
+      <h4 class="ion-no-margin">UberX</h4>
+      <span>Viagens Baratas</span>
+
+      <ion-grid class="ion-margin-vertical">
+      <ion-row>
+
+        <ion-col size="4">
+          <img src="https://c7.uihere.com/icons/381/441/311/car-citroen-vehicle-icon-63f65c5121097c35e0e12d20ee5bf925.png" alt="">
+          <span class="category">UberX</span>
+          <span>R$12,00</span>
+        </ion-col>
+
+        <ion-col size="4">
+            <img src="https://c7.uihere.com/icons/381/441/311/car-citroen-vehicle-icon-63f65c5121097c35e0e12d20ee5bf925.png" alt="">
+            <span class="category">Select</span>
+            <span>R$17,50</span>
+        </ion-col>
+
+        <ion-col size="4">
+            <img src="https://c7.uihere.com/icons/381/441/311/car-citroen-vehicle-icon-63f65c5121097c35e0e12d20ee5bf925.png" alt="">
+            <span class="category">Black</span>
+            <span>R$25,00</span>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+
+    <ion-button color="dark" expand="block">
+      Confirmar Uber
+    </ion-button>
+
+    </div>
+
   </div>
 </ion-content>
